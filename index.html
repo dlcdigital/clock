@@ -1,0 +1,38 @@
+<html>
+      <head>
+        <style>
+          body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #121212; font-family: Arial, sans-serif; }
+          .clock { width: 300px; height: 300px; border-radius: 50%; background: #222; position: relative; }
+          .hand { position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; }
+          .hour { left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(0deg); }
+          .minute { left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(0deg); }
+          .second { left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(0deg); }
+        </style>
+      </head>
+      <body>
+        <div class="clock">
+          <div class="hour" id="hour"></div>
+          <div class="minute" id="minute"></div>
+          <div class="second" id="second"></div>
+        </div>
+        <script>
+          function updateClock() {
+            const now = new Date();
+            const hour = now.getHours() % 12;
+            const minute = now.getMinutes();
+            const second = now.getSeconds();
+
+            const hourAngle = (hour * 30) + (minute / 60) * 30;
+            const minuteAngle = (minute * 6) + (second / 60) * 6;
+            const secondAngle = (second * 6) + (0.1 * second);
+
+            document.getElementById('hour').style.transform = `translate(-50%, -50%) rotate(${hourAngle}deg)`;
+            document.getElementById('minute').style.transform = `translate(-50%, -50%) rotate(${minuteAngle}deg)`;
+            document.getElementById('second').style.transform = `translate(-50%, -50%) rotate(${secondAngle}deg)`;
+          }
+
+          setInterval(updateClock, 1000);
+          updateClock();
+        </script>
+      </body>
+    </html>
